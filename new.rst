@@ -1,35 +1,27 @@
 .. _whats_new:
 
 ###############################
-What's New in {Singularity} 4.3
+What's New in {Singularity} 4.4
 ###############################
 
-This section highlights important changes and new features in {Singularity} 4.3
+This section highlights important changes and new features in {Singularity} 4.4
 that are of note to users. See also the "What's New" section in the Admin Guide
 for administrator-facing changes.
 
-========
-OCI-Mode
-========
+===========
+OCI Support
+===========
 
-- Images in OCI-SIF files can now be signed with a :ref:`cosign-compatible
-  signature <sec:cosign>`. These signatures can be pushed/pulled to/from OCI
-  registries.
-- Containers run in OCI-Mode now start in a cgroup, :ref:`cgroup namespace
-  <sec:cgroup_namespace>`, and mount the cgroup filesystem wherever possible.
+- Correctly escape ENV vars when importing OCI containers to native SIF, so that
+  they match podman / docker behaviour.
 
+==============
+Native Runtime
+==============
 
-=======
-Runtime
-=======
-
-- :ref:`Nesting Singularity-in-Docker and Singularity-in-Singularity <nested>`
-  is now explicitly supported and tested in native mode and OCI-Mode.
-- Subuid and subgid mappings used for :ref:`fakeroot <fakeroot>` and OCI-Mode
-  are now obtained with libsubid on supported systems.
-
-=====
-Build
-=====
-
-- A ``dnf`` bootstrap is now available, as an alias of ``yum``.
+- Include the home directory in the ``--workdir`` option (which is a modifier of
+  the ``--contain`` option).  This has always been in the ``--workdir`` usage
+  description but the home directory has not actually been included at least
+  since singularity 2.
+- Add ``/etc/resolv.conf`` to the list of host paths that can be prevented
+  from automatic import into the container with the ``--no-mount`` option.
