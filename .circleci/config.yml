@@ -1,24 +1,24 @@
 version: 2.1
 
 orbs:
-  go: circleci/go@1.7
-  aws-cli: circleci/aws-cli@2.0.3
+  go: circleci/go@3.0.3
+  aws-cli: circleci/aws-cli@5.4.1
 
 parameters:
   go-version:
     type: string
-    default: '1.24.1'
+    default: '1.26.0'
 
 executors:
   node:
     docker:
-      - image: node:20-slim
+      - image: node:24-slim
   python:
     docker:
       - image: python:3.12-bullseye
   ubuntu-machine:
     machine:
-     image: ubuntu-2404:2024.05.1
+     image: ubuntu-2404:current
 
 commands:
   install-deps-apt:
@@ -66,7 +66,7 @@ commands:
           name: Install python dependencies
           command: |
             source sphinx-venv/bin/activate
-            pip install setuptools 'sphinx<6' sphinx-rtd-theme rstcheck pygments m2r2
+            pip install setuptools 'sphinx<6' sphinx-rtd-theme rstcheck pygments m2r2 standard-imghdr
 
   init-submodules:
     steps:
